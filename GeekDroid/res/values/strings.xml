@@ -2,4 +2,7 @@
 <resources>
     <string name="hello">Hello World, MainActivity!</string>
     <string name="app_name">GeekDroid</string>
+    <string name="manage_tab_lbl">Manage DB</string>
+    <string name="post_tab_lbl">Post Blog</string>
+    <string name="browse_tab_lbl">Browse Blogs</string>
 </resources>
