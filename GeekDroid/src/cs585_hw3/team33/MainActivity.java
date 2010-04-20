@@ -23,22 +23,22 @@ public class MainActivity extends TabActivity {
 
         // Initialize a TabSpec for each tab and add it to the TabHost
         intent = new Intent().setClass(this, ManageActivity.class);
-        spec = tabHost.newTabSpec("manage").setIndicator(res.getText(R.string.manage_tab_lbl),null)
-        //                          res.getDrawable(R.drawable.ic_tab_artists))
-                      .setContent(intent);
+        spec = tabHost.newTabSpec("manage")
+        .setIndicator(res.getText(R.string.manage_tab_lbl),null)
+        .setContent(intent);
         tabHost.addTab(spec);
 
         // Do the same for the other tabs
         intent = new Intent().setClass(this, PostActivity.class);
-        spec = tabHost.newTabSpec("post").setIndicator(res.getText(R.string.post_tab_lbl),null)
-        //                          res.getDrawable(R.drawable.ic_tab_albums))
-                      .setContent(intent);
+        spec = tabHost.newTabSpec("post")
+        .setIndicator(res.getText(R.string.post_tab_lbl),null)
+        .setContent(intent);
         tabHost.addTab(spec);
 
         intent = new Intent().setClass(this, BrowseActivity.class);
-        spec = tabHost.newTabSpec("browse").setIndicator(res.getText(R.string.browse_tab_lbl), null)
-                          //res.getDrawable(R.drawable.ic_tab_songs))
-                      .setContent(intent);
+        spec = tabHost.newTabSpec("browse")
+        .setIndicator(res.getText(R.string.browse_tab_lbl),null)
+        .setContent(intent);
         tabHost.addTab(spec);
 
         tabHost.setCurrentTab(0);
