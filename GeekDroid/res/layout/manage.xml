@@ -1,0 +1,26 @@
+
+<FrameLayout android:id="@+id/FrameLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"><LinearLayout android:id="@+id/LinearLayout01" 
+android:layout_width="fill_parent" 
+xmlns:android="http://schemas.android.com/apk/res/android" 
+android:orientation="vertical" android:layout_gravity="center" android:layout_height="wrap_content">
+<Button  
+	android:text="Create"
+	android:id="@+id/Button01" 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content"
+	android:layout_gravity="center"></Button>
+<Button 
+	android:text="Populate" 
+	android:id="@+id/Button02" 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content"
+	android:layout_gravity="center"></Button>
+<Button 
+	android:text="Drop" 
+	android:id="@+id/Button03" 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	android:layout_gravity="center"></Button>
+
+
+</LinearLayout></FrameLayout>
