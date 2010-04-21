@@ -1,14 +1,17 @@
-
-
-<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"><Button  
+<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical">
+<Button  
 	android:text="@string/manage_create"
 	android:id="@+id/Button01" 
-	android:layout_gravity="center" android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="fill_parent"></Button><Button 
+	android:layout_gravity="center" android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>	
+	<Button 
 	android:text="@string/manage_populate" 
 	android:id="@+id/Button02" 
 	android:layout_height="wrap_content"
-	android:layout_gravity="center" android:layout_weight="1" android:layout_width="fill_parent"></Button><Button 
+	android:layout_gravity="center" android:layout_weight="1" android:layout_width="fill_parent"></Button>	
+	<Button 
 	android:text="@string/manage_drop" 
 	android:id="@+id/Button03" 
 	android:layout_height="wrap_content" 
-	android:layout_gravity="center" android:layout_weight="1" android:layout_width="fill_parent"></Button></LinearLayout>
+	android:layout_gravity="center" android:layout_weight="1" android:layout_width="fill_parent">
+	</Button>
+</LinearLayout>
