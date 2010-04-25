@@ -1,0 +1,32 @@
+C:\Program Files\Java\jdk1.6.0_17\bin>keytool -list -alias androiddebugkey -keystore "C:\Documents and Settings\<username>\.android
+\debug.keystore"
+Enter keystore password: (android)
+androiddebugkey, Apr 11, 2010, PrivateKeyEntry,
+Certificate fingerprint (MD5): (your android key will be generated here)
+=================================================================
+Then sign up here with your MD5 key
+
+http://code.google.com/android/add-ons/google-apis/maps-api-signup.html
+
+aftersignup:
+
+
+after signup:
+
+Thank you for signing up for an Android Maps API key!
+Your key is:
+
+07h-Q5JJmNr6fcervR_HUKGc_7qxxDLrkacBQQQ
+
+This key is good for all apps signed with your certificate whose fingerprint is:
+
+<MD5 KEY>
+
+Here is an example xml layout to get you started on your way to mapping glory:
+=====================This is used in the program========================
+              <com.google.android.maps.MapView
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:apiKey="07h-Q5JJmNr6fcervR_HUKGc_7qxxDLrkacBQQQ"
+                 />
+            
