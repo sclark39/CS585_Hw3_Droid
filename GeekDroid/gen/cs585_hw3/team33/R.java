@@ -15,11 +15,12 @@ public final class R {
         public static final int icon=0x7f020001;
     }
     public static final class id {
-        public static final int Button01=0x7f050003;
-        public static final int Button02=0x7f050004;
-        public static final int Button03=0x7f050005;
-        public static final int EditText01=0x7f050006;
+        public static final int CreateButton=0x7f050003;
+        public static final int DropButton=0x7f050005;
         public static final int LinearLayout01=0x7f050000;
+        public static final int PopulateButton=0x7f050004;
+        public static final int PostButton=0x7f050007;
+        public static final int PostText=0x7f050006;
         public static final int TextView01=0x7f050001;
         public static final int TextView02=0x7f050002;
     }
