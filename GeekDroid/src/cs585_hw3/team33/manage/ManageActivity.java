@@ -2,12 +2,10 @@ package cs585_hw3.team33.manage;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import cs585_hw3.team33.R;
-import cs585_hw3.team33.browse.Result;
 import cs585_hw3.team33.lib.ProgressRunnable;
 
 public class ManageActivity extends Activity {
