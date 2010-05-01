@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:padding="6dip" android:layout_height="wrap_content"><LinearLayout android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="0." android:layout_height="?android:attr/listPreferredItemHeight"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ID: 3" android:layout_weight="1" android:layout_gravity="center" android:id="@+id/ID_Text"></TextView><TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="(1030.5,5900.4)" android:layout_weight="1" android:layout_gravity="center" android:id="@+id/Loc_Text"></TextView></LinearLayout>
+
+<View android:background="@drawable/gradient_divider" android:layout_weight="0" android:layout_marginLeft="6dip" android:layout_height="fill_parent" android:layout_width="1px"></View><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:layout_weight="1" android:layout_marginLeft="6dip" android:text="This is sample text of a list item isn't it just dandy? Lets write a little bit more and see if it wraps. Lets do a little bit more wrapping" android:id="@+id/Blog_Text"></TextView>
+
+
+</LinearLayout>

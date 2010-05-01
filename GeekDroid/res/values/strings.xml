@@ -9,5 +9,5 @@
     <string name="manage_create">Create Schema</string>
     <string name="manage_populate">Populate Tables</string>
     <string name="manage_drop">Drop All</string>
-    
+    <string name="browse_no_results">No results.</string>    
 </resources>
