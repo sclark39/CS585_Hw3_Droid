@@ -12,8 +12,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<uses-library android:name="com.google.android.maps" /> 	
     </application>
-    <uses-sdk android:minSdkVersion="4" />
+    <uses-sdk android:minSdkVersion="4" />    
+<uses-library android:name="com.google.android.maps" /> 	
 <uses-permission android:name="android.permission.INTERNET" />
 </manifest> 
