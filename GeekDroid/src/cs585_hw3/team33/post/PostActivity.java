@@ -25,7 +25,7 @@ public class PostActivity extends Activity {
 	
 	public void submitPost() {
 
-        EditText txt = (EditText)findViewById(R.id.PostText);
+		EditText txt = (EditText)findViewById(R.id.PostText);
         String s = txt.getText().toString();
 		System.out.println(s);
 		

@@ -4,13 +4,40 @@
    android:layout_width="fill_parent"
    android:layout_height="fill_parent"
    >
-<LinearLayout android:id="@+id/LinearLayout02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="0"><EditText android:text="@+id/EditText01" android:id="@+id/EditText01" android:layout_width="wrap_content" android:layout_height="wrap_content">
-</EditText><TextView android:text="@+id/TextView01" android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content">
-</TextView><EditText android:text="@+id/EditText02" android:id="@+id/EditText02" android:layout_width="wrap_content" android:layout_height="wrap_content">
-</EditText></LinearLayout>
+<RelativeLayout android:id="@+id/RelativeLayout01" android:layout_weight="0" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_marginTop="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="0dp">
+<TextView 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/keywordLbl" 
+	android:layout_marginTop="20dp" 
+	android:text="Keywords:" />
+<EditText 
+	android:text=""   
+	android:layout_height="wrap_content" 
+	android:id="@+id/keywordTxt" 
+	android:layout_toRightOf="@+id/keywordLbl" 
+	android:layout_marginLeft="10dp" android:layout_width="fill_parent" android:inputType="textMultiLine" android:minLines="2" android:maxLines="4"/>
+<TextView 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/kLbl"
+	android:layout_below="@+id/keywordTxt"  
+	android:layout_marginTop="10dp" 
+	android:layout_alignLeft="@+id/keywordLbl" 
+	android:text="Amount:" />
+<EditText 
+	android:text="" 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content"
+	android:id="@+id/kTxt" 
+	android:layout_toRightOf="@+id/kLbl" 
+	android:layout_below="@+id/keywordTxt" 
+	android:layout_alignLeft="@+id/keywordTxt" android:inputType="number" android:minEms="3"/><Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/keywordTxt" android:id="@+id/QueryButton" android:text="Find Blogs" android:layout_alignParentRight="true"></Button>
+
+</RelativeLayout>
 
 
-<View android:id="@+id/View01" android:layout_width="wrap_content" android:layout_weight="0" android:layout_height="1dip" android:background="?android:attr/listDivider"></View><LinearLayout android:id="@+id/LinearLayout01" android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="vertical" android:layout_weight="1">
+<View android:id="@+id/View01" android:layout_width="wrap_content" android:layout_weight="0" android:layout_height="1dip" android:background="@drawable/gradient_divider"></View><LinearLayout android:id="@+id/LinearLayout01" android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="vertical" android:layout_weight="1">
 <ListView 
 android:id="@+id/android:list" 
 android:layout_width="fill_parent" 
