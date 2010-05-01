@@ -2,6 +2,7 @@ package cs585_hw3.team33.browse;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -54,7 +55,7 @@ public class BrowseActivity extends ListActivity {
          }
 	}
 	
-	ListActivity me = this;
+	Activity me = this;
 	private OnClickListener queryListener = new OnClickListener() {
 		public void onClick(View v) {
 			result_list.clear();
