@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import cs585_hw3.team33.R;
+import cs585_hw3.team33.lib.ProgressRunnable;
 
 public class BrowseActivity extends ListActivity {
 	ArrayList<Result> result_list = null;
@@ -22,12 +23,8 @@ public class BrowseActivity extends ListActivity {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.browse);
         
-        Button button = (Button)findViewById(R.id.QueryButton);
-        button.setOnClickListener( new OnClickListener() {
-        	public void onClick(View v) {
-        		executeQuery();
-        	}
-        });
+        ((Button)findViewById(R.id.QueryButton))
+        	.setOnClickListener( queryListener );
         
         result_list = new ArrayList<Result>();
         result_adapt = new ResultAdapter(this, R.layout.browse_row, result_list);
@@ -35,46 +32,45 @@ public class BrowseActivity extends ListActivity {
         
 	}
 	
+
 	public void executeQuery() {  
-		result_list.clear();
-        
-		Runnable getResults = new Runnable() {
-			@Override
-			public void run() {
-				
-				String keywords = ((EditText)findViewById(R.id.keywordTxt)).getText().toString();
-				String kStr = ((EditText)findViewById(R.id.kTxt)).getText().toString();
-				int k = (kStr.equals("")? Integer.MAX_VALUE : Integer.parseInt(kStr));
-		          
-		        try{
-		             Result r;
-		             
-		             for (int i = 1; i < 10 && i <= k; i++) {
-						 r = new Result(i,45,50,"This is a long line of stuff that I am telling you about right now I hope you enjoy it.");
-						 result_list.add(r);
-					 }
-					 
-					 Thread.sleep(500); // We need to remove this before we submit.
-					 
-					 Log.i("ARRAY", ""+ result_list.size());
-				 } catch (Exception e) { 
-					 Log.e("BACKGROUND_PROC", e.getMessage());
-		         }
-				 runOnUiThread(returnRes);
-			}
-		};
-		Thread t = new Thread(null, getResults, "BackgroundQuery");
-        
-        t.start();
-        viewResultsProgress = ProgressDialog.show(this, 
-        		"Please wait...", "Retrieving data ...", true);
+		String keywords = ((EditText)findViewById(R.id.keywordTxt)).getText().toString();
+		String kStr = ((EditText)findViewById(R.id.kTxt)).getText().toString();
+		int k = (kStr.equals("")? Integer.MAX_VALUE : Integer.parseInt(kStr));
+          
+        try{
+             Result r;
+             
+             for (int i = 1; i < 10 && i <= k; i++) {
+				 r = new Result(i,45,50,"This is a long line of stuff that I am telling you about right now I hope you enjoy it.");
+				 result_list.add(r);
+			 }
+			 
+			 Thread.sleep(500); // We need to remove this before we submit.
+			 
+			 Log.i("ARRAY", ""+ result_list.size());
+		 } catch (Exception e) { 
+			 Log.e("BACKGROUND_PROC", e.getMessage());
+         }
 	}
 	
-	 private Runnable returnRes = new Runnable() {	
-        @Override
-        public void run() {
-            viewResultsProgress.dismiss();
-            result_adapt.notifyDataSetChanged();
-        }
-    };
+	ListActivity me = this;
+	private OnClickListener queryListener = new OnClickListener() {
+		public void onClick(View v) {
+			result_list.clear();
+			ProgressRunnable getResults = 
+				new ProgressRunnable("Please wait...", "Finding blogs...") {
+					@Override
+					public void onGo() {
+						executeQuery();
+					}
+					public void onEnd() {
+			            result_adapt.notifyDataSetChanged();						
+					}
+			};
+			getResults.startThread(me,"BackgroundQuery");
+		}
+	};
+	
+	
 }
