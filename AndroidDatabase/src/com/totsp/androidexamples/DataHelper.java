@@ -13,25 +13,32 @@ import java.util.List;
 
 public class DataHelper {
 
-   private static final String DATABASE_NAME = "example.db";
-   private static final int DATABASE_VERSION = 1;
-   private static final String TABLE_NAME = "table1";
-   
+   private static final String DATABASE_NAME = "example2.db";
+   private static final int DATABASE_VERSION = 4;
+   private static final String TABLE_NAME = "table2";
    public static final String KEY_ROWID = "id";
+   public static final String MICROBLOG = "microblog";
    
    private Context context;
    private SQLiteDatabase db;
 
    public DataHelper(Context context) {
       this.context = context;
+      CreateDB();
+   }
+   
+   public void CreateDB() {
       OpenHelper openHelper = new OpenHelper(this.context);
       this.db = openHelper.getWritableDatabase();
    }
 
-   public void insert(String name) {
+   public void insert(Integer id, String X, String Y, String entry) {
 	   ContentValues values = new ContentValues();
-	   values.put("name",name);
-	   this.db.insert(TABLE_NAME, null, values);
+	   values.put("id",id);
+	   values.put("X_Coord",X);
+	   values.put("Y_Coord",Y);
+	   values.put(MICROBLOG, entry);
+	   long newid = this.db.insertOrThrow(TABLE_NAME, null, values);
    }
 
    public void deleteAll() {
@@ -40,11 +47,16 @@ public class DataHelper {
 
    public List<String> selectAll() {
       List<String> list = new ArrayList<String>();
-      Cursor cursor = this.db.query(TABLE_NAME, new String[] { "name" }, 
-        null, null, null, null, "name desc");
+      Cursor cursor = this.db.query(TABLE_NAME, new String[] { "id","X_Coord","Y_Coord",MICROBLOG },null,null, null, null,null);
+      
+      long count = cursor.getCount();
+      
       if (cursor.moveToFirst()) {
          do {
             list.add(cursor.getString(0)); 
+            list.add(cursor.getString(1)); 
+            list.add(cursor.getString(2)); 
+            list.add(cursor.getString(3));
          } while (cursor.moveToNext());
       }
       if (cursor != null && !cursor.isClosed()) {
@@ -56,8 +68,13 @@ public class DataHelper {
    public List<String> fetchNote(long rowId) throws SQLException {
 	   List<String> list = new ArrayList<String>();
 
-       Cursor cursor =  this.db.query(true, TABLE_NAME, new String[] { "name" }, KEY_ROWID + "=" + rowId, null,
-                   null, null, null, null);
+       //Cursor cursor =  this.db.query(TABLE_NAME, new String[] { MICROBLOG }, KEY_ROWID + "=" + rowId, null, null, null, null);
+	   int LOCX =5;
+	   int LOCY =10;
+	   
+	   Cursor cursor =  this.db.query(TABLE_NAME, new String[] { KEY_ROWID }, MICROBLOG +" like " + "'%is%'" + "OR" + "'%a%'", null, null, null,"(X_Coord-"+LOCX+")*(X_Coord-"+LOCX+") + (Y_Coord-"+LOCY+")*(Y_Coord-"+LOCY+")");
+	   //Cursor cursor =  this.db.query(TABLE_NAME, new String[] { KEY_ROWID }, MICROBLOG +" like " + "'%bad%'" + "OR" + "'%GOOD%'", null, null,null, null);
+       
        if (cursor.moveToFirst()) {
            do {
               list.add(cursor.getString(0)); 
@@ -68,7 +85,6 @@ public class DataHelper {
         }
        
         return list;
-
    }
 
    private static class OpenHelper extends SQLiteOpenHelper {
@@ -79,8 +95,9 @@ public class DataHelper {
 
       @Override
       public void onCreate(SQLiteDatabase db) {
-         db.execSQL("CREATE TABLE " + TABLE_NAME +  
-          "(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)");
+    	 db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+         db.execSQL("CREATE TABLE " + TABLE_NAME + "(id INTEGER PRIMARY KEY, X_Coord REAL, Y_Coord REAL, microblog TEXT)");
+         //db.execSQL("CREATE TABLE " + STRING_TABLE + "(Entry_id INTEGER  , Tag_id INTEGER , microblog_keyword TEXT,PRIMARY KEY (Entry_id,Tag_id), FOREIGN KEY(Entry_id) REFERENCES table2(id)");
       }
 
       @Override
