@@ -47,7 +47,7 @@ public class DataHelper {
 
    public List<String> selectAll() {
       List<String> list = new ArrayList<String>();
-      Cursor cursor = this.db.query(TABLE_NAME, new String[] { "id","X_Coord","Y_Coord",MICROBLOG },null,null, null, null,null);
+      Cursor cursor = this.db.query(TABLE_NAME, new String[] {"id","X_Coord","Y_Coord",MICROBLOG },null,null, null, null,null);
       
       long count = cursor.getCount();
       
@@ -71,8 +71,10 @@ public class DataHelper {
        //Cursor cursor =  this.db.query(TABLE_NAME, new String[] { MICROBLOG }, KEY_ROWID + "=" + rowId, null, null, null, null);
 	   int LOCX =5;
 	   int LOCY =10;
-	   
-	   Cursor cursor =  this.db.query(TABLE_NAME, new String[] { KEY_ROWID }, MICROBLOG +" like " + "'%is%'" + "OR" + "'%a%'", null, null, null,"(X_Coord-"+LOCX+")*(X_Coord-"+LOCX+") + (Y_Coord-"+LOCY+")*(Y_Coord-"+LOCY+")");
+	   this.db.
+	   Cursor cursor =  this.db.query(TABLE_NAME, new String[] { KEY_ROWID }, 
+			   MICROBLOG +" like " + "'%is%'" + "OR" + "'%a%'",   null, null, null,
+			   "(X_Coord-"+LOCX+")*(X_Coord-"+LOCX+") + (Y_Coord-"+LOCY+")*(Y_Coord-"+LOCY+")");
 	   //Cursor cursor =  this.db.query(TABLE_NAME, new String[] { KEY_ROWID }, MICROBLOG +" like " + "'%bad%'" + "OR" + "'%GOOD%'", null, null,null, null);
        
        if (cursor.moveToFirst()) {

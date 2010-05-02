@@ -29,21 +29,12 @@ public class BrowseActivity extends ListActivity {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.browse);
         
-        ((Button)findViewById(R.id.QueryButton))
-        	.setOnClickListener( queryListener );
-        
         result_list = new ArrayList<Result>();
         result_adapt = new ResultAdapter(this, R.layout.browse_row, result_list);
         setListAdapter(result_adapt);
        
-        ((Button)findViewById(R.id.MapButton))
-    	.setOnClickListener( new OnClickListener() {
-    		public void onClick(View v) {
-    	        Intent mapIntent = new Intent(me, ShowResultsMapActivity.class);
-    			 //this.getApplication().
-    			 startActivity(mapIntent);
-    		}
-    	});
+        ((Button)findViewById(R.id.QueryButton)).setOnClickListener( queryListener );
+        ((Button)findViewById(R.id.MapButton)).setOnClickListener( mapListener );
 	}
 	
 
@@ -70,20 +61,55 @@ public class BrowseActivity extends ListActivity {
 	
 	private OnClickListener queryListener = new OnClickListener() {
 		public void onClick(View v) {
-			result_list.clear();
-			ProgressRunnable getResults = 
-				new ProgressRunnable("Please wait...", "Finding blogs...") {
-					@Override
-					public void onGo() {
-						executeQuery();
-					}
-					public void onEnd() {
-			            result_adapt.notifyDataSetChanged();						
-					}
+			ProgressRunnable getResults  
+			= new ProgressRunnable("Please wait...", "Finding blogs...") {
+				@Override
+				public void onGo() {
+					result_list.clear();
+					executeQuery();
+				}
+				public void onEnd() {
+		            result_adapt.notifyDataSetChanged();
+		            ((EditText)findViewById(R.id.keywordTxt)).setText("");
+		    		((EditText)findViewById(R.id.kTxt)).setText("");
+		    		
+				}
 			};
 			getResults.startThread(me,"BackgroundQuery");
 		}
 	};
-	
+	private OnClickListener mapListener = new OnClickListener() {
+		public void onClick(View v) {			
+			String keywords = ((EditText)findViewById(R.id.keywordTxt)).getText().toString();
+			String kStr = ((EditText)findViewById(R.id.kTxt)).getText().toString();
+			
+			
+			if (result_list.size() == 0 || !keywords.equals("") || !kStr.equals("")) {					
+				ProgressRunnable getResults  
+				= new ProgressRunnable("Please wait...", "Finding blogs...") {
+					@Override
+					public void onGo() {
+						result_list.clear();
+						executeQuery();
+					}
+					public void onEnd() {
+			            result_adapt.notifyDataSetChanged();
+			            ((EditText)findViewById(R.id.keywordTxt)).setText("");
+			    		((EditText)findViewById(R.id.kTxt)).setText("");
+			    		
+			    		Intent mapIntent = new Intent(me, ShowResultsMapActivity.class);
+			    		mapIntent.putExtra("results",result_list);
+			    		startActivity(mapIntent);
+					}
+				};
+				getResults.startThread(me,"BackgroundQuery");
+			} else {
+				Intent mapIntent = new Intent(me, ShowResultsMapActivity.class);
+				mapIntent.putExtra("results",result_list);
+				startActivity(mapIntent);
+				
+			}
+		}
+	};
 	
 }
