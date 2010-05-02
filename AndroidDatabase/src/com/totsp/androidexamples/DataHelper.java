@@ -69,8 +69,11 @@ public class DataHelper {
 	   List<String> list = new ArrayList<String>();
 
        //Cursor cursor =  this.db.query(TABLE_NAME, new String[] { MICROBLOG }, KEY_ROWID + "=" + rowId, null, null, null, null);
+	   int LOCX =1000;
+	   int LOCY =2000;
 	   
-	   Cursor cursor =  this.db.query(TABLE_NAME, new String[] { MICROBLOG }, "microblog like " + "'%geek%'", null, null, null, null);
+	   Cursor cursor =  this.db.query(TABLE_NAME, new String[] { KEY_ROWID }, MICROBLOG +" like " + "'%GOOD%'", null, null, null,("X_Coord" - LOCX)*("X_Coord" - LOCX)+("Y_Coord" - LOCY)*("Y_Coord" - LOCY););
+	   //Cursor cursor =  this.db.query(TABLE_NAME, new String[] { KEY_ROWID }, MICROBLOG +" like " + "'%bad%'" + "OR" + "'%GOOD%'", null, null,null, null);
        
        if (cursor.moveToFirst()) {
            do {
@@ -93,7 +96,7 @@ public class DataHelper {
       @Override
       public void onCreate(SQLiteDatabase db) {
     	 db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-         db.execSQL("CREATE TABLE " + TABLE_NAME + "(id INTEGER PRIMARY KEY, X_Coord TEXT, Y_Coord TEXT, microblog TEXT)");
+         db.execSQL("CREATE TABLE " + TABLE_NAME + "(id INTEGER PRIMARY KEY, X_Coord REAL, Y_Coord REAL, microblog TEXT)");
          //db.execSQL("CREATE TABLE " + STRING_TABLE + "(Entry_id INTEGER  , Tag_id INTEGER , microblog_keyword TEXT,PRIMARY KEY (Entry_id,Tag_id), FOREIGN KEY(Entry_id) REFERENCES table2(id)");
       }
 
