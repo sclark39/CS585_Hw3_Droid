@@ -34,9 +34,9 @@ abstract public class ProgressRunnable {
 		return t;
 	}
 	
-	private ArrayList<Toast> toastDialogs = new ArrayList<Toast>();
+	private ArrayList<String> toastMessages = new ArrayList<String>();
 	public void reportToast(String message) {
-		toastDialogs.add( Toast.makeText(caller, message, Toast.LENGTH_SHORT) );
+		toastMessages.add(message);
 	}
 	private String reportMessage = null;
 	public void reportAlert(String message) {
@@ -79,8 +79,9 @@ abstract public class ProgressRunnable {
     			};
         	}
         	else {
-        		for (Toast t : toastDialogs)
-        			t.show();        		
+        		for (String tMsg : toastMessages)
+        			Toast.makeText(caller, tMsg, Toast.LENGTH_SHORT) 
+        				.show();     		
         	}
         }
     };

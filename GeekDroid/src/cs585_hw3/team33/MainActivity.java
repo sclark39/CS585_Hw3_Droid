@@ -61,11 +61,10 @@ public class MainActivity extends TabActivity implements LocationObserver {
 
         tabHost.setCurrentTab(0);
         
-        lm = (LocationManager) 
-        getSystemService(Context.LOCATION_SERVICE);    
-    
-        locationListener = new ObservableLocationListener();
-        locationListener.list.add(this);
+        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);    
+       
+        locationListener = new ObservableLocationListener( lm.getLastKnownLocation(Context.LOCATION_SERVICE) );
+        locationListener.subscribe(this);
     
     }
     @Override

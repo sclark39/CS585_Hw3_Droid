@@ -23,15 +23,15 @@ public class PostActivity extends Activity implements LocationObserver {
         
         Button button = (Button)findViewById(R.id.PostButton);
         button.setOnClickListener( submitListener );
-        ((MainActivity)me.getParent()).locationListener.list.add(this);
+        ((MainActivity)me.getParent()).locationListener.subscribe(this);
 	}
 	
 	public void OnResume() {
-		((MainActivity)me.getParent()).locationListener.list.add(this);
+		((MainActivity)me.getParent()).locationListener.subscribe(this);
 	}
 	
 	public void OnPause() {
-		((MainActivity)me.getParent()).locationListener.list.remove(this);
+		((MainActivity)me.getParent()).locationListener.unsubscribe(this);
 	}
 	@Override
 	public void locationChanged(GeoPoint p) {
