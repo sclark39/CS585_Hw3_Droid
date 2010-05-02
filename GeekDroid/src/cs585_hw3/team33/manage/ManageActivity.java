@@ -62,7 +62,6 @@ public class ManageActivity extends Activity {
 	Activity me = this;
 	private OnClickListener createListener = new OnClickListener() {
 		public void onClick(View v) {
-			createDB();/*
 			ProgressRunnable getResults = 
 				new ProgressRunnable("Please wait...", "Creating database ...") {
 					public void onGo() {
@@ -71,7 +70,7 @@ public class ManageActivity extends Activity {
 					public void onEnd() {			            					
 					}
 			};
-			getResults.startThread(me,"BackgroundManageDB");*/
+			getResults.startThread(me,"BackgroundManageDB");
 		}
 	};
 	private OnClickListener popListener = new OnClickListener() {

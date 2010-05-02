@@ -46,9 +46,11 @@ public class BrowseActivity extends ListActivity {
 		int x = 5, y = 5;
 		
 		MainActivity m = ((MainActivity)this.getParent());
-		if (m.dh.isOpen())
+		//m.dh.createDB();
+		if (m.dh.isOpen()) {
+			//m.dh.populateDB();
 			m.dh.query(x,y,keywords, k, result_list);
-				
+		}		
         try{
 			 Thread.sleep(500);
 		 } catch (Exception e) { 

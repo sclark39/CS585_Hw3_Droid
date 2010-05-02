@@ -27,8 +27,10 @@ public class PostActivity extends Activity {
 		int x=5,y=5;
 		
 		MainActivity m = ((MainActivity)this.getParent());
-		if (m.dh.isOpen())
-			m.dh.insert(x,y,s);
+		if (m.dh.isOpen()) 
+			m.dh.insert(x,y,s);			
+		
+			
 		
 		try{
             Thread.sleep(1000); // We need to remove this before we submit.
