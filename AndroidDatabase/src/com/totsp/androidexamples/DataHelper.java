@@ -14,9 +14,10 @@ import java.util.List;
 public class DataHelper {
 
    private static final String DATABASE_NAME = "example2.db";
-   private static final int DATABASE_VERSION = 3;
+   private static final int DATABASE_VERSION = 4;
    private static final String TABLE_NAME = "table2";
    public static final String KEY_ROWID = "id";
+   public static final String MICROBLOG = "microblog";
    
    private Context context;
    private SQLiteDatabase db;
@@ -36,7 +37,7 @@ public class DataHelper {
 	   values.put("id",id);
 	   values.put("X_Coord",X);
 	   values.put("Y_Coord",Y);
-	   values.put("microblog", entry);
+	   values.put(MICROBLOG, entry);
 	   long newid = this.db.insertOrThrow(TABLE_NAME, null, values);
    }
 
@@ -46,7 +47,7 @@ public class DataHelper {
 
    public List<String> selectAll() {
       List<String> list = new ArrayList<String>();
-      Cursor cursor = this.db.query(TABLE_NAME, new String[] { "id","X_Coord","Y_Coord","microblog" },null,null, null, null,null);
+      Cursor cursor = this.db.query(TABLE_NAME, new String[] { "id","X_Coord","Y_Coord",MICROBLOG },null,null, null, null,null);
       
       long count = cursor.getCount();
       
@@ -67,9 +68,9 @@ public class DataHelper {
    public List<String> fetchNote(long rowId) throws SQLException {
 	   List<String> list = new ArrayList<String>();
 
-       //Cursor cursor =  this.db.query(TABLE_NAME, new String[] { "microblog" }, KEY_ROWID + "=" + rowId, null, null, null, null);
+       //Cursor cursor =  this.db.query(TABLE_NAME, new String[] { MICROBLOG }, KEY_ROWID + "=" + rowId, null, null, null, null);
 	   
-	   Cursor cursor =  this.db.query(TABLE_NAME, new String[] { "microblog" }, "microblog LIKE %geek%", null, null, null, null);
+	   Cursor cursor =  this.db.query(TABLE_NAME, new String[] { MICROBLOG }, "microblog like " + "'%geek%'", null, null, null, null);
        
        if (cursor.moveToFirst()) {
            do {
