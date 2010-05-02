@@ -44,9 +44,15 @@ public class BrowseActivity extends ListActivity {
 		
 		String keywords = ((EditText)findViewById(R.id.keywordTxt)).getText().toString();
 		int k = (kStr.equals("")? Integer.MAX_VALUE : Integer.parseInt(kStr));
-		int x = 5, y = 5;
+		int x = 0, y = 0;
 		
 		MainActivity m = ((MainActivity)this.getParent());
+		
+		if (m.current_loc != null) {
+			x = m.current_loc.getLatitudeE6();
+			y = m.current_loc.getLongitudeE6();
+		}
+		
 		if (m.dh.isOpen()) 
 			m.dh.query(x,y,keywords, k, result_list);
 		else

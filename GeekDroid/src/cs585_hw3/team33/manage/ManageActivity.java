@@ -1,12 +1,15 @@
 package cs585_hw3.team33.manage;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import cs585_hw3.team33.GPSActivity;
 import cs585_hw3.team33.MainActivity;
 import cs585_hw3.team33.R;
+import cs585_hw3.team33.browse.map.ShowResultsMapActivity;
 import cs585_hw3.team33.lib.ProgressRunnable;
 
 public class ManageActivity extends Activity {
@@ -21,6 +24,15 @@ public class ManageActivity extends Activity {
         findViewById(R.id.DropButton)
 	    	.setOnClickListener( dropListener );
         
+        final Activity me = this;
+        findViewById(R.id.Button01)
+    	.setOnClickListener( new OnClickListener() {
+    		public void onClick(View v) {
+
+				Intent mapIntent = new Intent(me, GPSActivity.class);
+				startActivity(mapIntent);
+    		}
+    	});
 	}
 	
 	public void createDB(ProgressRunnable pr) {

@@ -36,7 +36,7 @@ abstract public class ProgressRunnable {
 	
 	private ArrayList<Toast> toastDialogs = new ArrayList<Toast>();
 	public void reportToast(String message) {
-		toastDialogs.add( Toast.makeText(caller, message, 1000) );
+		toastDialogs.add( Toast.makeText(caller, message, Toast.LENGTH_SHORT) );
 	}
 	private String reportMessage = null;
 	public void reportAlert(String message) {

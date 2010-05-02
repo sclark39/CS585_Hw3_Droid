@@ -13,5 +13,13 @@
     <string name="manage_drop">Drop Database</string>
     <string name="manage_drop_desc">Deletes all entries in the database.</string>
     <string name="browse_no_results">No results.</string>    
-    
+<string name="AboutText">
+CSCI585 Homework 3 - Team 33\n
+  Skyler Clark\n
+  Nasr Husami\n
+  Anirudh Rehki\n\n
+Please use the buttons below to manage the database. To
+make blog posts or to view other blog posts, please 
+press the tabs at the top.
+</string>    
 </resources>
