@@ -7,11 +7,11 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import cs585_hw3.team33.MainActivity;
 import cs585_hw3.team33.R;
 import cs585_hw3.team33.browse.list.Result;
 import cs585_hw3.team33.browse.list.ResultAdapter;
@@ -39,23 +39,19 @@ public class BrowseActivity extends ListActivity {
 	
 
 	public void executeQuery() {  
-		String keywords = ((EditText)findViewById(R.id.keywordTxt)).getText().toString();
 		String kStr = ((EditText)findViewById(R.id.kTxt)).getText().toString();
+		
+		String keywords = ((EditText)findViewById(R.id.keywordTxt)).getText().toString();
 		int k = (kStr.equals("")? Integer.MAX_VALUE : Integer.parseInt(kStr));
-          
+		int x = 5, y = 5;
+		
+		MainActivity m = ((MainActivity)this.getParent());
+		if (m.dh.isOpen())
+			m.dh.query(x,y,keywords, k, result_list);
+				
         try{
-             Result r;
-             
-             for (int i = 1; i < 10 && i <= k; i++) {
-				 r = new Result(i,45,50,"This is a long line of stuff that I am telling you about right now I hope you enjoy it.");
-				 result_list.add(r);
-			 }
-			 
-			 Thread.sleep(500); // We need to remove this before we submit.
-			 
-			 Log.i("ARRAY", ""+ result_list.size());
+			 Thread.sleep(500);
 		 } catch (Exception e) { 
-			 Log.e("BACKGROUND_PROC", e.getMessage());
          }
 	}
 	
@@ -65,7 +61,6 @@ public class BrowseActivity extends ListActivity {
 			= new ProgressRunnable("Please wait...", "Finding blogs...") {
 				@Override
 				public void onGo() {
-					result_list.clear();
 					executeQuery();
 				}
 				public void onEnd() {
@@ -89,7 +84,6 @@ public class BrowseActivity extends ListActivity {
 				= new ProgressRunnable("Please wait...", "Finding blogs...") {
 					@Override
 					public void onGo() {
-						result_list.clear();
 						executeQuery();
 					}
 					public void onEnd() {

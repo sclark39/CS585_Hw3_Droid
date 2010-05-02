@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import cs585_hw3.team33.MainActivity;
 import cs585_hw3.team33.R;
 import cs585_hw3.team33.lib.ProgressRunnable;
 
@@ -24,22 +25,34 @@ public class ManageActivity extends Activity {
 	
 	public void createDB() {
 		// fill in
-		try{
-            Thread.sleep(1000); // We need to remove this before we submit.
+		MainActivity m = ((MainActivity)this.getParent());
+		if (!m.dh.isOpen())
+			m.dh.createDB();
+        
+		try{		
+			Thread.sleep(1000); // We need to remove this before we submit.
 		 } catch (Exception e) { 
         }
 	}
 	public void populateDB() {
+		MainActivity m = ((MainActivity)this.getParent());
+		if (m.dh.isOpen())
+			m.dh.populateDB();
+        
 		// fill in
 		try{
-            Thread.sleep(1000); // We need to remove this before we submit.
+			Thread.sleep(1000); // We need to remove this before we submit.
 		 } catch (Exception e) { 
         }
 	}
 	public void dropDB() {
+		MainActivity m = ((MainActivity)this.getParent());
+		if (m.dh.isOpen())
+			m.dh.deleteAll();
+		
 		// fill in
-		try{
-            Thread.sleep(1000); // We need to remove this before we submit.
+		try{			
+			Thread.sleep(1000); // We need to remove this before we submit.
 		 } catch (Exception e) { 
         }
 	}
@@ -49,6 +62,7 @@ public class ManageActivity extends Activity {
 	Activity me = this;
 	private OnClickListener createListener = new OnClickListener() {
 		public void onClick(View v) {
+			createDB();/*
 			ProgressRunnable getResults = 
 				new ProgressRunnable("Please wait...", "Creating database ...") {
 					public void onGo() {
@@ -57,7 +71,7 @@ public class ManageActivity extends Activity {
 					public void onEnd() {			            					
 					}
 			};
-			getResults.startThread(me,"BackgroundManageDB");
+			getResults.startThread(me,"BackgroundManageDB");*/
 		}
 	};
 	private OnClickListener popListener = new OnClickListener() {

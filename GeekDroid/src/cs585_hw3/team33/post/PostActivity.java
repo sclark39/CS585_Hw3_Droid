@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import cs585_hw3.team33.MainActivity;
 import cs585_hw3.team33.R;
 import cs585_hw3.team33.lib.ProgressRunnable;
 
@@ -23,6 +24,11 @@ public class PostActivity extends Activity {
 
         String s = ((EditText)findViewById(R.id.PostText)).getText().toString();
 		System.out.println(s);
+		int x=5,y=5;
+		
+		MainActivity m = ((MainActivity)this.getParent());
+		if (m.dh.isOpen())
+			m.dh.insert(x,y,s);
 		
 		try{
             Thread.sleep(1000); // We need to remove this before we submit.
