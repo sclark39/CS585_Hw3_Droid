@@ -27,13 +27,12 @@ public class Main extends Activity {
         
         this.output = (TextView) this.findViewById(R.id.out_text);
         
-        
-        this.dh = new DataHelper(this);
+                this.dh = new DataHelper(this);
         this.dh.deleteAll();
         
-        this.dh.insert(1,"100","200","Nasrullah Husami is a good boy");
+        this.dh.insert(1,"500","600","Nasrullah Husami is a good boy");
         this.dh.insert(2,"300","400","Anirudh Rekhi is a bad boy");
-        this.dh.insert(3,"500","600","Skyler Clark is a geek");
+        this.dh.insert(3,"700","800","Skyler Clark is a geek");
 
         List<String> Microblog_Entry_Tuples = this.dh.selectAll();
         StringBuilder sb = new StringBuilder();
