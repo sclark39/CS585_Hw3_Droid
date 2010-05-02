@@ -39,7 +39,7 @@ public class PostActivity extends Activity implements LocationObserver {
 			.setText("( "+p.getLatitudeE6()+", "+p.getLongitudeE6()+" )");
 	}
 	
-	public void submitPost() {
+	public void submitPost(ProgressRunnable pr) {
 
         String s = ((EditText)findViewById(R.id.PostText)).getText().toString();
 		System.out.println(s);
@@ -50,8 +50,10 @@ public class PostActivity extends Activity implements LocationObserver {
 		if (m.current_loc != null) {
 			x = m.current_loc.getLatitudeE6();
 			y = m.current_loc.getLongitudeE6();
+		} else {
+			pr.reportToast("No location found; using 0,0.");
 		}
-		
+		 
 		if (m.dh.isOpen()) 
 			m.dh.insert(x,y,s);			
 		
@@ -69,7 +71,7 @@ public class PostActivity extends Activity implements LocationObserver {
 			ProgressRunnable getResults = 
 				new ProgressRunnable("Please wait...", "Submitting blog post ...") {
 					public void onGo() {
-						submitPost();
+						submitPost(this);
 					}
 					public void onEnd() {	
 						((EditText)findViewById(R.id.PostText))

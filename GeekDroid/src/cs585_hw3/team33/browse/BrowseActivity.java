@@ -51,6 +51,8 @@ public class BrowseActivity extends ListActivity {
 		if (m.current_loc != null) {
 			x = m.current_loc.getLatitudeE6();
 			y = m.current_loc.getLongitudeE6();
+		} else {
+			pr.reportToast("No location found; using 0,0.");
 		}
 		
 		if (m.dh.isOpen()) 
