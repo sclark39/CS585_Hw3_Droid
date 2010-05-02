@@ -35,7 +35,11 @@ public class DataHelper {
 		  @Override
 		  public void onCreate(SQLiteDatabase db) {
 			 db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-			 db.execSQL("CREATE TABLE " + TABLE_NAME + "(id INTEGER PRIMARY KEY, X_Coord REAL, Y_Coord REAL, Post_Text TEXT)");
+			 db.execSQL("CREATE TABLE " + TABLE_NAME + "("
+					 + "id INTEGER PRIMARY KEY, "
+					 + "X_Coord INTEGER, "
+					 + "Y_Coord INTEGER, "
+					 + "Post_Text TEXT)");
 		  }
 
 		  @Override
@@ -45,47 +49,27 @@ public class DataHelper {
 			  onCreate(db);
 		  }
 	  };
-      this.db = openHelper.getWritableDatabase();
+      db = openHelper.getWritableDatabase();
    }
    
-   public void populateDB() {
-	   insert(1,"500","600","Nasrullah Husami is a good boy");
-       insert(2,"300","400","Anirudh Rekhi is a bad boy");
-       insert(3,"700","800","Skyler Clark is a geek");
+   public void populateDB() {	   
+	   insert(500,600,"Nasrullah Husami is a good boy"); 			// Posted from No idea.
+       insert(19240000,-99120000,"Anirudh Rekhi is a bad boy"); 	// Posted from Mexico City
+       insert(35410000,139460000,"Skyler Clark is a geek");		// Posted from Japan
+   }
+   
+   public void dropDB() {
+	   deleteAll();
    }
 
-   public void insert(int x, int y, String postTxt) {}
-   public void insert(Integer id, String X, String Y, String entry) {
+   public void insert(int x, int y, String postTxt) {
 	   ContentValues values = new ContentValues();
-	   values.put("id",id);
-	   values.put("X_Coord",X);
-	   values.put("Y_Coord",Y);
-	   values.put("Post_Text", entry);
+	   values.put("X_Coord",x);
+	   values.put("Y_Coord",y);
+	   values.put("Post_Text", postTxt);
 	   
 	   @SuppressWarnings("unused")
-	   long newid = this.db.insertOrThrow(TABLE_NAME, null, values);
-   }
-
-   public void deleteAll() {
-      this.db.delete(TABLE_NAME, null, null);
-   }
-
-   public List<String> selectAll() {
-      List<String> list = new ArrayList<String>();
-      Cursor cursor = this.db.query(TABLE_NAME, new String[] { "id","X_Coord","Y_Coord","Post_Text" },null,null, null, null,null);
-      
-      if (cursor.moveToFirst()) {
-         do {
-            list.add(cursor.getString(0)); 
-            list.add(cursor.getString(1)); 
-            list.add(cursor.getString(2)); 
-            list.add(cursor.getString(3));
-         } while (cursor.moveToNext());
-      }
-      if (cursor != null && !cursor.isClosed()) {
-         cursor.close();
-      }
-      return list;
+	   long newid = db.insertOrThrow(TABLE_NAME, null, values);
    }
    
    public void query(int x, int y, String keywords, int k, ArrayList<Result> res ) {
@@ -99,7 +83,7 @@ public class DataHelper {
 	   }
 	
 	   sql += "ORDER BY (X_Coord-"+x+")*(X_Coord-"+x+") + (Y_Coord-"+y+")*(Y_Coord-"+y+") LIMIT BY " + k;
-	   Cursor cursor = this.db.rawQuery(sql, 
+	   Cursor cursor = db.rawQuery(sql, 
 			   new String[] { "id","X_Coord","Y_Coord","Post_Text" });
 	   
 	   res.clear();
@@ -117,4 +101,28 @@ public class DataHelper {
            cursor.close();
         }        
    }
+
+   public void deleteAll() {
+      db.delete(TABLE_NAME, null, null);
+   }
+   
+/*
+   public List<String> selectAll() {
+      List<String> list = new ArrayList<String>();
+      Cursor cursor = db.query(TABLE_NAME, new String[] { "id","X_Coord","Y_Coord","Post_Text" },null,null, null, null,null);
+      
+      if (cursor.moveToFirst()) {
+         do {
+            list.add(cursor.getString(0)); 
+            list.add(cursor.getString(1)); 
+            list.add(cursor.getString(2)); 
+            list.add(cursor.getString(3));
+         } while (cursor.moveToNext());
+      }
+      if (cursor != null && !cursor.isClosed()) {
+         cursor.close();
+      }
+      return list;
+   }
+   */
 }

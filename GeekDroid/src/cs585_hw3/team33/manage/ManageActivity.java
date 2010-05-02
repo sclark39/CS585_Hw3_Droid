@@ -48,7 +48,7 @@ public class ManageActivity extends Activity {
 	public void dropDB() {
 		MainActivity m = ((MainActivity)this.getParent());
 		if (m.dh.isOpen())
-			m.dh.deleteAll();
+			m.dh.dropDB();
 		
 		// fill in
 		try{			
