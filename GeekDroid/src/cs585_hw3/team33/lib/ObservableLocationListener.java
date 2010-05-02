@@ -30,9 +30,8 @@ public class ObservableLocationListener implements LocationListener
 	public void subscribe(LocationObserver lo) {
 		if (lo == null)
 			return;
-		if (current_loc != null && list.add(lo)) {
-			lo.locationChanged(current_loc);
-		}
+		list.add(lo);
+		lo.locationChanged(current_loc);
 	}
 	public void unsubscribe(LocationObserver lo) {
 		list.remove(lo);

@@ -26,7 +26,7 @@ public class PostActivity extends Activity implements LocationObserver {
         ((MainActivity)me.getParent()).locationListener.subscribe(this);
 	}
 	
-	public void OnResume() {
+	public void OnResume() {		
 		((MainActivity)me.getParent()).locationListener.subscribe(this);
 	}
 	
@@ -36,7 +36,8 @@ public class PostActivity extends Activity implements LocationObserver {
 	@Override
 	public void locationChanged(GeoPoint p) {
 		((TextView)findViewById(R.id.CoordText))
-			.setText("( "+p.getLatitudeE6()+", "+p.getLongitudeE6()+" )");
+			.setText((p == null? "No location found."
+					: "( "+p.getLatitudeE6()+", "+p.getLongitudeE6()+" )"));
 	}
 	
 	public void submitPost(ProgressRunnable pr) {
