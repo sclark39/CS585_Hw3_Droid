@@ -23,23 +23,24 @@ public class PostActivity extends Activity implements LocationObserver {
         
         Button button = (Button)findViewById(R.id.PostButton);
         button.setOnClickListener( submitListener );
-        ((MainActivity)me.getParent()).locationListener.list.add(this);
+        ((MainActivity)me.getParent()).locationListener.subscribe(this);
 	}
 	
-	public void OnResume() {
-		((MainActivity)me.getParent()).locationListener.list.add(this);
+	public void OnResume() {		
+		((MainActivity)me.getParent()).locationListener.subscribe(this);
 	}
 	
 	public void OnPause() {
-		((MainActivity)me.getParent()).locationListener.list.remove(this);
+		((MainActivity)me.getParent()).locationListener.unsubscribe(this);
 	}
 	@Override
 	public void locationChanged(GeoPoint p) {
 		((TextView)findViewById(R.id.CoordText))
-			.setText("( "+p.getLatitudeE6()+", "+p.getLongitudeE6()+" )");
+			.setText((p == null? "No location found."
+					: "( "+p.getLatitudeE6()+", "+p.getLongitudeE6()+" )"));
 	}
 	
-	public void submitPost() {
+	public void submitPost(ProgressRunnable pr) {
 
         String s = ((EditText)findViewById(R.id.PostText)).getText().toString();
 		System.out.println(s);
@@ -50,8 +51,10 @@ public class PostActivity extends Activity implements LocationObserver {
 		if (m.current_loc != null) {
 			x = m.current_loc.getLatitudeE6();
 			y = m.current_loc.getLongitudeE6();
+		} else {
+			pr.reportToast("No location found; using 0,0.");
 		}
-		
+		 
 		if (m.dh.isOpen()) 
 			m.dh.insert(x,y,s);			
 		
@@ -69,7 +72,7 @@ public class PostActivity extends Activity implements LocationObserver {
 			ProgressRunnable getResults = 
 				new ProgressRunnable("Please wait...", "Submitting blog post ...") {
 					public void onGo() {
-						submitPost();
+						submitPost(this);
 					}
 					public void onEnd() {	
 						((EditText)findViewById(R.id.PostText))

@@ -13,5 +13,5 @@
 <TextView android:text="@string/manage_drop_desc" android:layout_height="wrap_content" android:id="@+id/TextView02" android:focusable="true" android:textAppearance="?android:attr/textAppearanceSmall" android:textColor="@color/list_font" android:layout_gravity="center" android:layout_width="wrap_content"></TextView>
 
 
-</LinearLayout><View android:layout_weight="0" android:background="?android:attr/listDivider" android:layout_height="1px" android:layout_width="fill_parent"></View><Button android:text="@+id/Button01" android:id="@+id/Button01" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+</LinearLayout><View android:layout_weight="0" android:background="?android:attr/listDivider" android:layout_height="1px" android:layout_width="fill_parent"></View>
 </LinearLayout>
