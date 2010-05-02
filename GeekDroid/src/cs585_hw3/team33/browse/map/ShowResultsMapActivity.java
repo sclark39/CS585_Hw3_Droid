@@ -18,7 +18,7 @@ public class ShowResultsMapActivity extends MapActivity {
 	    setContentView(R.layout.browse_map);
 	    
 	    // Set Up Map View
-	    MapView mapView = (MapView) findViewById(R.id.mapview);
+	    MapView mapView = (MapView) findViewById(R.id.mapView);
 	    mapView.setBuiltInZoomControls(true);
 	    ItemizedBlogOverlay iconLayer = new ItemizedBlogOverlay( 
 	    		this.getResources().getDrawable(R.drawable.icon),this);

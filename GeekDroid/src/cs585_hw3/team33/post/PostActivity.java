@@ -6,11 +6,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.android.maps.GeoPoint;
+
 import cs585_hw3.team33.MainActivity;
 import cs585_hw3.team33.R;
 import cs585_hw3.team33.lib.ProgressRunnable;
+import cs585_hw3.team33.lib.ObservableLocationListener.LocationObserver;
 
-public class PostActivity extends Activity {
+public class PostActivity extends Activity implements LocationObserver {
 
 	public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
@@ -18,15 +23,35 @@ public class PostActivity extends Activity {
         
         Button button = (Button)findViewById(R.id.PostButton);
         button.setOnClickListener( submitListener );
+        ((MainActivity)me.getParent()).locationListener.list.add(this);
+	}
+	
+	public void OnResume() {
+		((MainActivity)me.getParent()).locationListener.list.add(this);
+	}
+	
+	public void OnPause() {
+		((MainActivity)me.getParent()).locationListener.list.remove(this);
+	}
+	@Override
+	public void locationChanged(GeoPoint p) {
+		((TextView)findViewById(R.id.CoordText))
+			.setText("( "+p.getLatitudeE6()+", "+p.getLongitudeE6()+" )");
 	}
 	
 	public void submitPost() {
 
         String s = ((EditText)findViewById(R.id.PostText)).getText().toString();
 		System.out.println(s);
-		int x=5,y=5;
+		int x=0,y=0;
 		
 		MainActivity m = ((MainActivity)this.getParent());
+		
+		if (m.current_loc != null) {
+			x = m.current_loc.getLatitudeE6();
+			y = m.current_loc.getLongitudeE6();
+		}
+		
 		if (m.dh.isOpen()) 
 			m.dh.insert(x,y,s);			
 		
