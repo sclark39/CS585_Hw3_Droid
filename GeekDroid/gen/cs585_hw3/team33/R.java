@@ -16,6 +16,7 @@ public final class R {
     }
     public static final class id {
         public static final int Blog_Text=0x7f05000a;
+        public static final int CoordText=0x7f050014;
         public static final int CreateButton=0x7f05000f;
         public static final int DropButton=0x7f050011;
         public static final int ID_Text=0x7f05000c;

@@ -1,14 +1,3 @@
-<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical">
-<Button  
-	android:text="@string/manage_create"
-	android:layout_gravity="center" android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/CreateButton"></Button>	
-	<Button 
-	android:text="@string/manage_populate" 
-	android:layout_height="wrap_content"
-	android:layout_gravity="center" android:layout_weight="1" android:layout_width="fill_parent" android:id="@+id/PopulateButton"></Button>	
-	<Button 
-	android:text="@string/manage_drop" 
-	android:layout_height="wrap_content" 
-	android:layout_gravity="center" android:layout_weight="1" android:layout_width="fill_parent" android:id="@+id/DropButton">
-	</Button>
-</LinearLayout>
+
+<RelativeLayout android:id="@+id/RelativeLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:paddingTop="5dp"><Button android:text="@string/manage_create" android:layout_gravity="center" android:layout_height="wrap_content" android:id="@+id/CreateButton" android:layout_width="wrap_content" android:layout_centerHorizontal="true"></Button><Button android:text="@string/manage_populate" android:layout_height="wrap_content" android:layout_gravity="center" android:id="@+id/PopulateButton" android:layout_width="wrap_content" android:layout_alignLeft="@+id/CreateButton" android:layout_below="@+id/CreateButton" android:layout_alignRight="@+id/CreateButton"></Button><Button android:text="@string/manage_drop" android:layout_height="wrap_content" android:layout_gravity="center" android:id="@+id/DropButton" android:layout_width="wrap_content" android:layout_alignLeft="@+id/CreateButton" android:layout_alignRight="@+id/CreateButton" android:layout_below="@+id/PopulateButton">
+	</Button></RelativeLayout>
