@@ -39,7 +39,7 @@ public class ResultAdapter extends ArrayAdapter<Result> {
                     TextView blogTxt = (TextView) v.findViewById(R.id.Blog_Text);
                     
                     if (idTxt != null) 
-                    	idTxt.setText("ID: "+ r.id);                            
+                    	idTxt.setText("Blog #"+ r.id);                            
                     if(locTxt != null)
                         locTxt.setText("("+ r.x + ", " + r.y + ")");
                     if(blogTxt != null)

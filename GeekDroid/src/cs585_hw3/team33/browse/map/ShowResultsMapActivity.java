@@ -20,12 +20,13 @@ public class ShowResultsMapActivity extends MapActivity {
 	    // Set Up Map View
 	    MapView mapView = (MapView) findViewById(R.id.mapview);
 	    mapView.setBuiltInZoomControls(true);
-	    ItemizedBlogOverlay iconLayer = new ItemizedBlogOverlay(
+	    ItemizedBlogOverlay iconLayer = new ItemizedBlogOverlay( 
 	    		this.getResources().getDrawable(R.drawable.icon),this);
 	    mapView.getOverlays().add(iconLayer);
 	    
 	    // Add the Icons
-	    ArrayList<Result> result_list = (ArrayList<Result>)this.getIntent().getExtras().get("results");
+	    @SuppressWarnings("unchecked")
+		ArrayList<Result> result_list = (ArrayList<Result>)this.getIntent().getExtras().get("results");
 	    OverlayItem icon;
 	    Result res;
 	    for (int i = 0; i < result_list.size(); i++)	{
