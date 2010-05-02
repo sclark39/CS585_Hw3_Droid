@@ -2,6 +2,7 @@ package cs585_hw3.team33.lib;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.widget.Toast;
 
 abstract public class ProgressRunnable {
 	abstract public void onGo();
@@ -28,6 +29,8 @@ abstract public class ProgressRunnable {
 		return t;
 	}
 	
+	public String report = null;
+	
 	private Runnable goRun = new Runnable() {
 		public void run() {
 			onGo();
@@ -38,8 +41,12 @@ abstract public class ProgressRunnable {
 	 private Runnable endRun = new Runnable() {	
         @Override
         public void run() {
-        	onEnd();
+        	onEnd();        	
         	dialog.dismiss();
+        	if (report != null) {        		
+        		Toast t = Toast.makeText(caller, report, 1000);
+        		t.show();
+        	}
         }
     };
 

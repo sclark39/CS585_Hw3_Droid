@@ -10,13 +10,13 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
 
 
-public class HelloItemizedOverlay extends ItemizedOverlay {
+public class ItemizedBlogOverlay extends ItemizedOverlay<OverlayItem> {
 	Context mContext;
 	
 	private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();	
-	public HelloItemizedOverlay(Drawable defaultMarker, Context context,OverlayItem overlayitem2 ) {
-		
+	public ItemizedBlogOverlay(Drawable defaultMarker, Context context) {		
 		super(boundCenterBottom(defaultMarker));
+		
 		mContext = context;
 		// TODO Auto-generated constructor stub
 	}
@@ -30,15 +30,14 @@ public class HelloItemizedOverlay extends ItemizedOverlay {
 	@Override
 	public int size() {
 		return mOverlays.size();
-		
 	}
 		  
 		
 	public void addOverlay(OverlayItem overlay) {
 	    mOverlays.add(overlay);
 	    populate();
-	    
 	}
+	
 	@Override
 	protected boolean onTap(int index) {
 	  OverlayItem item = mOverlays.get(index);

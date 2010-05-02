@@ -7,11 +7,11 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import cs585_hw3.team33.MainActivity;
 import cs585_hw3.team33.R;
 import cs585_hw3.team33.browse.list.Result;
 import cs585_hw3.team33.browse.list.ResultAdapter;
@@ -24,66 +24,96 @@ public class BrowseActivity extends ListActivity {
 	
 	ProgressDialog viewResultsProgress = null;
 
-	Activity me = this;
 	public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.browse);
-        
-        ((Button)findViewById(R.id.QueryButton))
-        	.setOnClickListener( queryListener );
         
         result_list = new ArrayList<Result>();
         result_adapt = new ResultAdapter(this, R.layout.browse_row, result_list);
         setListAdapter(result_adapt);
        
-        ((Button)findViewById(R.id.MapButton))
-    	.setOnClickListener( new OnClickListener() {
-    		public void onClick(View v) {
-    	        Intent mapIntent = new Intent(me, ShowResultsMapActivity.class);
-    			 //this.getApplication().
-    			 startActivity(mapIntent);
-    		}
-    	});
+        ((Button)findViewById(R.id.QueryButton)).setOnClickListener( new QueryListener(this) );
+        ((Button)findViewById(R.id.MapButton)).setOnClickListener( new MapListener(this) );
 	}
 	
-
-	public void executeQuery() {  
-		String keywords = ((EditText)findViewById(R.id.keywordTxt)).getText().toString();
+	public void executeQuery(ProgressRunnable pr) {
 		String kStr = ((EditText)findViewById(R.id.kTxt)).getText().toString();
+		
+		String keywords = ((EditText)findViewById(R.id.keywordTxt)).getText().toString();
 		int k = (kStr.equals("")? Integer.MAX_VALUE : Integer.parseInt(kStr));
-          
+		int x = 5, y = 5;
+		
+		MainActivity m = ((MainActivity)this.getParent());
+		if (m.dh.isOpen()) 
+			m.dh.query(x,y,keywords, k, result_list);
+		else
+			pr.report = "Couldn't execute query; open the database first.";
+			
         try{
-             Result r;
-             
-             for (int i = 1; i < 10 && i <= k; i++) {
-				 r = new Result(i,45,50,"This is a long line of stuff that I am telling you about right now I hope you enjoy it.");
-				 result_list.add(r);
-			 }
-			 
-			 Thread.sleep(500); // We need to remove this before we submit.
-			 
-			 Log.i("ARRAY", ""+ result_list.size());
+			 Thread.sleep(500);
 		 } catch (Exception e) { 
-			 Log.e("BACKGROUND_PROC", e.getMessage());
          }
 	}
 	
-	private OnClickListener queryListener = new OnClickListener() {
+	class QueryListener implements OnClickListener {
+		Activity parent;
+		QueryListener(Activity a) {
+			parent = a;
+		}
 		public void onClick(View v) {
-			result_list.clear();
-			ProgressRunnable getResults = 
-				new ProgressRunnable("Please wait...", "Finding blogs...") {
-					@Override
-					public void onGo() {
-						executeQuery();
-					}
-					public void onEnd() {
-			            result_adapt.notifyDataSetChanged();						
-					}
+			ProgressRunnable getResults  
+			= new ProgressRunnable("Please wait...", "Finding blogs...") {
+				@Override
+				public void onGo() {
+					executeQuery(this);
+				}
+				public void onEnd() {
+		            result_adapt.notifyDataSetChanged();
+		            ((EditText)findViewById(R.id.keywordTxt)).setText("");
+		    		((EditText)findViewById(R.id.kTxt)).setText("");
+		    		
+				}
 			};
-			getResults.startThread(me,"BackgroundQuery");
+			getResults.startThread(parent,"BackgroundQuery");
 		}
 	};
-	
+	class MapListener implements OnClickListener {
+		Activity parent;
+		MapListener(Activity a) {
+			parent = a;
+		}
+		public void onClick(View v) {			
+			String keywords = ((EditText)findViewById(R.id.keywordTxt)).getText().toString();
+			String kStr = ((EditText)findViewById(R.id.kTxt)).getText().toString();
+			
+			if (result_list.size() == 0 || !keywords.equals("") || !kStr.equals("")) {					
+				ProgressRunnable getResults  
+				= new ProgressRunnable("Please wait...", "Finding blogs...") {
+					@Override
+					public void onGo() {
+						executeQuery(this);
+					}
+					public void onEnd() {
+			            result_adapt.notifyDataSetChanged();
+			            ((EditText)findViewById(R.id.keywordTxt)).setText("");
+			    		((EditText)findViewById(R.id.kTxt)).setText("");
+			    		
+		    			if (result_list.size() == 0 && this.report == null)			    			
+		    				report = "Nothing to display; no results returned.";
+
+		    			Intent mapIntent = new Intent(parent, ShowResultsMapActivity.class);
+		    			mapIntent.putExtra("results",result_list);
+		    			startActivity(mapIntent);
+					}
+				};
+				getResults.startThread(parent,"BackgroundQuery");
+			} else {
+				Intent mapIntent = new Intent(parent, ShowResultsMapActivity.class);
+				mapIntent.putExtra("results",result_list);
+				startActivity(mapIntent);
+				
+			}
+		}
+	};
 	
 }

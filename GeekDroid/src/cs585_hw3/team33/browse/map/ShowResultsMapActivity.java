@@ -1,40 +1,45 @@
 package cs585_hw3.team33.browse.map;
  
-import java.util.List;
+import java.util.ArrayList;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
 import cs585_hw3.team33.R;
+import cs585_hw3.team33.browse.list.Result;
 
 public class ShowResultsMapActivity extends MapActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.browse_map);
+	    
+	    // Set Up Map View
 	    MapView mapView = (MapView) findViewById(R.id.mapview);
 	    mapView.setBuiltInZoomControls(true);
-	    List<Overlay> mapOverlays = mapView.getOverlays();
-	    Drawable drawable = this.getResources().getDrawable(R.drawable.icon);
-	    HelloItemizedOverlay itemizedoverlay = new HelloItemizedOverlay(drawable,null,null);
-	    mapOverlays.add(itemizedoverlay);
-	    GeoPoint point = new GeoPoint(19240000,-99120000);
-	    OverlayItem overlayitem = new OverlayItem(point, "Hola, Mundo!", "I'm in Mexico City!");
-	    GeoPoint point2 = new GeoPoint(35410000, 139460000);
-	    itemizedoverlay.addOverlay(overlayitem);
+	    ItemizedBlogOverlay iconLayer = new ItemizedBlogOverlay( 
+	    		this.getResources().getDrawable(R.drawable.icon),this);
+	    mapView.getOverlays().add(iconLayer);
 	    
-	    OverlayItem overlayitem2 = new OverlayItem(point2, "Sekai, konichiwa!", "I'm in Japan!");	    
-	    itemizedoverlay.addOverlay(overlayitem2);
-	    
+	    // Add the Icons
+	    @SuppressWarnings("unchecked")
+		ArrayList<Result> result_list = (ArrayList<Result>)this.getIntent().getExtras().get("results");
+	    OverlayItem icon;
+	    Result res;
+	    for (int i = 0; i < result_list.size(); i++)	{
+	    	res = result_list.get(i);
+	    	icon = new OverlayItem(
+		    		new GeoPoint(res.x, res.y), 
+		    		"Blog Post #"+res.id,
+		    		res.text);
+	    	iconLayer.addOverlay(icon);
+	    }
 	}
 	@Override
 	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
