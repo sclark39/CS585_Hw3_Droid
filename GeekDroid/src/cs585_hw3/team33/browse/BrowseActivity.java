@@ -12,6 +12,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.google.android.maps.GeoPoint;
+
 import cs585_hw3.team33.MainActivity;
 import cs585_hw3.team33.R;
 import cs585_hw3.team33.browse.list.Result;
@@ -71,6 +74,10 @@ public class BrowseActivity extends ListActivity {
 		
 		Intent mapIntent = new Intent(this, ShowResultsMapActivity.class);
 		mapIntent.putExtra("results",one_item);
+		
+		mapIntent.putExtra("z_x", result_list.get(position).x );
+		mapIntent.putExtra("z_y", result_list.get(position).y );		    					
+		
 		startActivity(mapIntent);
 
 		super.onListItemClick(l, v, position, id);
@@ -120,10 +127,19 @@ public class BrowseActivity extends ListActivity {
 			    		((EditText)findViewById(R.id.kTxt)).setText("");
 			    		
 			    		makeAlertToast();
-		    			if (result_list.size() == 0)
+		    			
+			    		Intent mapIntent = new Intent(parent, ShowResultsMapActivity.class);
+		    			
+			    		if (result_list.size() == 0) {
 		    				reportToast("Nothing to display; no results returned.");
 
-		    			Intent mapIntent = new Intent(parent, ShowResultsMapActivity.class);
+		    				GeoPoint p = ((MainActivity)parent.getParent()).current_loc;
+		    			
+		    				if (p != null) {
+		    					mapIntent.putExtra("z_x",p.getLatitudeE6());
+		    					mapIntent.putExtra("z_y",p.getLongitudeE6());		    					
+		    				}
+		    			}
 		    			mapIntent.putExtra("results",result_list);
 		    			startActivity(mapIntent);
 					}

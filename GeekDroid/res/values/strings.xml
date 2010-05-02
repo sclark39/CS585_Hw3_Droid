@@ -6,7 +6,7 @@
     <string name="post_tab_lbl">Post Blog</string>
     <string name="post_submit">Submit Post</string>
     <string name="browse_tab_lbl">Browse Blogs</string>
-    <string name="manage_create">Create Database</string>
+    <string name="manage_create">Open Database</string>
     <string name="manage_create_desc">Opens the database if it has already been created, or creates a new one.</string>
     <string name="manage_populate">Populate Tables</string>
     <string name="manage_populate_desc">Adds some sample data to the table for testing purposes.</string>
