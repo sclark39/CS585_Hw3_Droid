@@ -1,7 +1,12 @@
 package cs585_hw3.team33.lib;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.util.Log;
 import android.widget.Toast;
 
 abstract public class ProgressRunnable {
@@ -29,8 +34,21 @@ abstract public class ProgressRunnable {
 		return t;
 	}
 	
-	public String report = null;
-	
+	private ArrayList<Toast> toastDialogs = new ArrayList<Toast>();
+	public void reportToast(String message) {
+		toastDialogs.add( Toast.makeText(caller, message, 1000) );
+	}
+	private String reportMessage = null;
+	public void reportAlert(String message) {
+		if (reportMessage == null) 
+			reportMessage = message;
+	}
+	public void makeAlertToast() {
+		if (reportMessage != null)  {
+			reportToast(reportMessage);
+			reportMessage = null;
+		}
+	}
 	private Runnable goRun = new Runnable() {
 		public void run() {
 			onGo();
@@ -43,9 +61,26 @@ abstract public class ProgressRunnable {
         public void run() {
         	onEnd();        	
         	dialog.dismiss();
-        	if (report != null) {        		
-        		Toast t = Toast.makeText(caller, report, 1000);
-        		t.show();
+        	if (reportMessage != null) {
+        		AlertDialog reportDialog;
+    			try {
+    				reportDialog = new AlertDialog.Builder(caller).create();
+    				reportDialog.setTitle("Error");
+    				reportDialog.setMessage(reportMessage);
+    				reportDialog.setButton("OK", new DialogInterface.OnClickListener(){
+    					public void onClick(DialogInterface dialog, int which) {
+    						return;
+    					}
+    				});
+        			reportDialog.show();
+    			}
+    			catch (Exception e) {
+    				Log.d("fsdar",e.toString());
+    			};
+        	}
+        	else {
+        		for (Toast t : toastDialogs)
+        			t.show();        		
         	}
         }
     };

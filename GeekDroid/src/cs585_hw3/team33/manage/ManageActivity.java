@@ -14,16 +14,16 @@ public class ManageActivity extends Activity {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.manage);
         
-        ((Button)findViewById(R.id.CreateButton))
+        findViewById(R.id.CreateButton)
         	.setOnClickListener( createListener );
-        ((Button)findViewById(R.id.PopulateButton))
+        findViewById(R.id.PopulateButton)
 	    	.setOnClickListener( popListener );
-        ((Button)findViewById(R.id.DropButton))
+        findViewById(R.id.DropButton)
 	    	.setOnClickListener( dropListener );
         
 	}
 	
-	public void createDB() {
+	public void createDB(ProgressRunnable pr) {
 		// fill in
 		MainActivity m = ((MainActivity)this.getParent());
 		if (!m.dh.isOpen())
@@ -34,10 +34,12 @@ public class ManageActivity extends Activity {
 		 } catch (Exception e) { 
         }
 	}
-	public void populateDB() {
+	public void populateDB(ProgressRunnable pr) {
 		MainActivity m = ((MainActivity)this.getParent());
 		if (m.dh.isOpen())
 			m.dh.populateDB();
+		else
+			pr.reportAlert("No database open to populate.");
         
 		// fill in
 		try{
@@ -45,10 +47,12 @@ public class ManageActivity extends Activity {
 		 } catch (Exception e) { 
         }
 	}
-	public void dropDB() {
+	public void dropDB(ProgressRunnable pr) {
 		MainActivity m = ((MainActivity)this.getParent());
 		if (m.dh.isOpen())
 			m.dh.dropDB();
+		else
+			pr.reportAlert("No database open to drop.");
 		
 		// fill in
 		try{			
@@ -65,7 +69,7 @@ public class ManageActivity extends Activity {
 			ProgressRunnable getResults = 
 				new ProgressRunnable("Please wait...", "Creating database ...") {
 					public void onGo() {
-						createDB();
+						createDB(this);
 					}
 					public void onEnd() {			            					
 					}
@@ -78,7 +82,7 @@ public class ManageActivity extends Activity {
 			ProgressRunnable getResults = 
 				new ProgressRunnable("Please wait...", "Populating database ...") {
 					public void onGo() {
-						populateDB();
+						populateDB(this);
 					}
 					public void onEnd() {			            					
 					}
@@ -91,7 +95,7 @@ public class ManageActivity extends Activity {
 			ProgressRunnable getResults = 
 				new ProgressRunnable("Please wait...", "Dropping database ...") {
 					public void onGo() {
-						dropDB();
+						dropDB(this);
 					}
 					public void onEnd() {			            					
 					}
