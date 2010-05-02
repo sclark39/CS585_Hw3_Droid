@@ -32,8 +32,9 @@
 	android:id="@+id/kTxt" 
 	android:layout_toRightOf="@+id/kLbl" 
 	android:layout_below="@+id/keywordTxt" 
-	android:layout_alignLeft="@+id/keywordTxt" android:inputType="number" android:minEms="3"/><Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/keywordTxt" android:id="@+id/QueryButton" android:text="Find Blogs" android:layout_alignParentRight="true"></Button>
+	android:layout_alignLeft="@+id/keywordTxt" android:inputType="number" android:layout_toLeftOf="@+id/QueryButton" android:layout_marginRight="2dp"/><Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/keywordTxt" android:id="@+id/QueryButton" android:text="Find Blogs" android:layout_toLeftOf="@+id/MapButton"></Button>
 
+<Button android:layout_width="wrap_content" android:layout_below="@+id/keywordTxt" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:id="@+id/MapButton" android:text="Map"></Button>
 </RelativeLayout>
 
 

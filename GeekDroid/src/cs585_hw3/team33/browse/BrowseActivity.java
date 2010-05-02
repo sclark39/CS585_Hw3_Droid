@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import cs585_hw3.team33.R;
+import cs585_hw3.team33.browse.list.Result;
+import cs585_hw3.team33.browse.list.ResultAdapter;
+import cs585_hw3.team33.browse.map.ShowResultsMapActivity;
 import cs585_hw3.team33.lib.ProgressRunnable;
 
 public class BrowseActivity extends ListActivity {
@@ -19,7 +23,8 @@ public class BrowseActivity extends ListActivity {
 	ResultAdapter result_adapt;
 	
 	ProgressDialog viewResultsProgress = null;
-	
+
+	Activity me = this;
 	public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.browse);
@@ -30,7 +35,15 @@ public class BrowseActivity extends ListActivity {
         result_list = new ArrayList<Result>();
         result_adapt = new ResultAdapter(this, R.layout.browse_row, result_list);
         setListAdapter(result_adapt);
-        
+       
+        ((Button)findViewById(R.id.MapButton))
+    	.setOnClickListener( new OnClickListener() {
+    		public void onClick(View v) {
+    	        Intent mapIntent = new Intent(me, ShowResultsMapActivity.class);
+    			 //this.getApplication().
+    			 startActivity(mapIntent);
+    		}
+    	});
 	}
 	
 
@@ -55,7 +68,6 @@ public class BrowseActivity extends ListActivity {
          }
 	}
 	
-	Activity me = this;
 	private OnClickListener queryListener = new OnClickListener() {
 		public void onClick(View v) {
 			result_list.clear();

@@ -1,4 +1,4 @@
-package cs585_hw3.team33.browse;
+package cs585_hw3.team33.browse.list;
 
 
 public class Result {
