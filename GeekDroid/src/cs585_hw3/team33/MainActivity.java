@@ -1,18 +1,16 @@
 package cs585_hw3.team33;
 
-import com.google.android.maps.GeoPoint;
-
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.TabHost;
-import android.widget.Toast;
+
+import com.google.android.maps.GeoPoint;
+
 import cs585_hw3.team33.browse.BrowseActivity;
 import cs585_hw3.team33.lib.DatabaseHelper;
 import cs585_hw3.team33.lib.ObservableLocationListener;
