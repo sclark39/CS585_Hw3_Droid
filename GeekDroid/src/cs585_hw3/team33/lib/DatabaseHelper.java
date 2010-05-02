@@ -82,7 +82,7 @@ public class DatabaseHelper {
 		   b1st = false;
 	   }
 	
-	   sql += " ORDER BY (X_Coord-"+x+")*(X_Coord-"+x+") + (Y_Coord-"+y+")*(Y_Coord-"+y+")";
+	   sql += " ORDER BY (X_Coord-'"+x+"')*(X_Coord- '"+x+"') + (Y_Coord-'"+y+"')*(Y_Coord-'"+y+"')";
 	   if (k < Integer.MAX_VALUE)
 		   sql +=" LIMIT " + k;
 	   try {
