@@ -53,8 +53,8 @@ public class DatabaseHelper {
    }
    
    public void populateDB() {	   
-	   insert(500,600,"Nasrullah Husami is a good boy"); 			// Posted from No idea.
-       insert(19240000,-99120000,"Anirudh Rekhi is a bad boy"); 	// Posted from Mexico City
+	   insert(500,600,"Nasrullah Husami is a good boy"); 		// Posted from the Atlantic Ocean off the coast of Africa
+       insert(19240000,-99120000,"Anirudh Rekhi is a bad boy"); // Posted from Mexico City
        insert(35410000,139460000,"Skyler Clark is a geek");		// Posted from Japan
    }
    
