@@ -15,16 +15,16 @@ public final class R {
         public static final int icon=0x7f020001;
     }
     public static final class id {
-        public static final int Blog_Text=0x7f05000b;
-        public static final int CreateButton=0x7f05000c;
-        public static final int DropButton=0x7f05000e;
-        public static final int ID_Text=0x7f050009;
+        public static final int Blog_Text=0x7f05000c;
+        public static final int CreateButton=0x7f05000d;
+        public static final int DropButton=0x7f05000f;
+        public static final int ID_Text=0x7f05000a;
         public static final int LinearLayout01=0x7f050008;
-        public static final int Loc_Text=0x7f05000a;
+        public static final int Loc_Text=0x7f05000b;
         public static final int MapButton=0x7f050006;
-        public static final int PopulateButton=0x7f05000d;
-        public static final int PostButton=0x7f050010;
-        public static final int PostText=0x7f05000f;
+        public static final int PopulateButton=0x7f05000e;
+        public static final int PostButton=0x7f050011;
+        public static final int PostText=0x7f050010;
         public static final int QueryButton=0x7f050005;
         public static final int RelativeLayout01=0x7f050000;
         public static final int View01=0x7f050007;
@@ -32,13 +32,15 @@ public final class R {
         public static final int kTxt=0x7f050004;
         public static final int keywordLbl=0x7f050001;
         public static final int keywordTxt=0x7f050002;
+        public static final int mapview=0x7f050009;
     }
     public static final class layout {
         public static final int browse=0x7f030000;
-        public static final int browse_row=0x7f030001;
-        public static final int main=0x7f030002;
-        public static final int manage=0x7f030003;
-        public static final int post=0x7f030004;
+        public static final int browse_map=0x7f030001;
+        public static final int browse_row=0x7f030002;
+        public static final int main=0x7f030003;
+        public static final int manage=0x7f030004;
+        public static final int post=0x7f030005;
     }
     public static final class string {
         public static final int app_name=0x7f040001;

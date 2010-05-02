@@ -17,7 +17,8 @@
 		<activity android:name=".manage.ManageActivity"></activity>
 		<activity android:name=".post.PostActivity"></activity>
 		<activity android:name=".browse.BrowseActivity"></activity>
+   		<uses-library android:name="com.google.android.maps" /> 
     </application>
-    <uses-sdk android:minSdkVersion="4" />
-
+    <uses-sdk android:minSdkVersion="4" />    	
+	<uses-permission android:name="android.permission.INTERNET" />
 </manifest> 
