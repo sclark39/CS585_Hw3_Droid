@@ -13,7 +13,7 @@ import com.google.android.maps.OverlayItem;
 
 import cs585_hw3.team33.R;
 
-public class ShowResultsOnMapActivity extends MapActivity {
+public class ShowResultsMapActivity extends MapActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.browse_map);

@@ -6,7 +6,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.TabHost;
-import cs585_hw3.team33.browse.list.MainBrowseActivity;
+import cs585_hw3.team33.browse.BrowseActivity;
 import cs585_hw3.team33.manage.ManageActivity;
 import cs585_hw3.team33.post.PostActivity;
 
@@ -38,7 +38,7 @@ public class MainActivity extends TabActivity {
         .setContent(intent);
         tabHost.addTab(spec);
 
-        intent = new Intent().setClass(this, MainBrowseActivity.class);
+        intent = new Intent().setClass(this, BrowseActivity.class);
         spec = tabHost.newTabSpec("browse")
         .setIndicator(res.getText(R.string.browse_tab_lbl),null)
         .setContent(intent);

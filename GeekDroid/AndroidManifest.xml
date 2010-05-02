@@ -14,9 +14,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		<activity android:name=".manage.ManageActivity"></activity>
-		<activity android:name=".post.PostActivity"></activity>
-		<activity android:name=".browse.BrowseActivity"></activity>
+		<activity android:name=".manage.ManageActivity" />
+		<activity android:name=".post.PostActivity" />
+		<activity android:name=".browse.BrowseActivity" />
+		<activity android:name=".browse.map.ShowResultsMapActivity" />
    		<uses-library android:name="com.google.android.maps" /> 
     </application>
     <uses-sdk android:minSdkVersion="4" />    	
