@@ -9,12 +9,12 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.TabHost;
 import cs585_hw3.team33.browse.BrowseActivity;
-import cs585_hw3.team33.lib.db.DataHelper;
+import cs585_hw3.team33.lib.DatabaseHelper;
 import cs585_hw3.team33.manage.ManageActivity;
 import cs585_hw3.team33.post.PostActivity;
 
 public class MainActivity extends TabActivity {
-	public DataHelper dh;
+	public DatabaseHelper dh;
 	
     /** Called when the activity is first created. */
     @Override
@@ -23,7 +23,7 @@ public class MainActivity extends TabActivity {
         setContentView(R.layout.main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         
-        dh = new DataHelper(this);
+        dh = new DatabaseHelper(this);
   /*      // Initialize the Database
         dh = new DataHelper(this);
         
