@@ -19,8 +19,7 @@ public final class R {
     }
     public static final class id {
         public static final int Blog_Text=0x7f06000a;
-        public static final int Button01=0x7f060015;
-        public static final int CoordText=0x7f060018;
+        public static final int CoordText=0x7f060017;
         public static final int CreateButton=0x7f060010;
         public static final int DropButton=0x7f060014;
         public static final int ID_Text=0x7f06000c;
@@ -28,8 +27,8 @@ public final class R {
         public static final int Loc_Text=0x7f06000e;
         public static final int MapButton=0x7f060006;
         public static final int PopulateButton=0x7f060013;
-        public static final int PostButton=0x7f060017;
-        public static final int PostText=0x7f060016;
+        public static final int PostButton=0x7f060016;
+        public static final int PostText=0x7f060015;
         public static final int QueryButton=0x7f060005;
         public static final int RelativeLayout01=0x7f060000;
         public static final int TextView01=0x7f060011;
