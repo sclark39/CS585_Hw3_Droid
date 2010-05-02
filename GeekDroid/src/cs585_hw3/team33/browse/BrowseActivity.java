@@ -50,7 +50,7 @@ public class BrowseActivity extends ListActivity {
 		if (m.dh.isOpen()) 
 			m.dh.query(x,y,keywords, k, result_list);
 		else
-			pr.report = "Couldn't execute query; open the database first.";
+			pr.reportAlert("Couldn't execute query; open the database first." );
 			
         try{
 			 Thread.sleep(500);
@@ -113,8 +113,9 @@ public class BrowseActivity extends ListActivity {
 			            ((EditText)findViewById(R.id.keywordTxt)).setText("");
 			    		((EditText)findViewById(R.id.kTxt)).setText("");
 			    		
-		    			if (result_list.size() == 0 && this.report == null)			    			
-		    				report = "Nothing to display; no results returned.";
+			    		makeAlertToast();
+		    			if (result_list.size() == 0)
+		    				reportToast("Nothing to display; no results returned.");
 
 		    			Intent mapIntent = new Intent(parent, ShowResultsMapActivity.class);
 		    			mapIntent.putExtra("results",result_list);
