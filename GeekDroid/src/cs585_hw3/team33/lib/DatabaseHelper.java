@@ -53,9 +53,12 @@ public class DatabaseHelper {
    }
    
    public void populateDB() {	   
-	   insert(500,600,"Nasrullah Husami is a good boy"); 		// Posted from the Atlantic Ocean off the coast of Africa
-       insert(19240000,-99120000,"Anirudh Rekhi is a bad boy"); // Posted from Mexico City
-       insert(35410000,139460000,"Skyler Clark is a geek");		// Posted from Japan
+	   insert(1693000,78750000,"Nasrullah Husami is a Droid.Posted from India"); 			// Posted from India
+       insert(40727500,-74003900,"Anirudh Rekhi is an Android. Posted from New York"); 		// Posted from New York
+       insert(35410000,139460000,"Skyler Clark is a Geek. Posted from Japan");				// Posted from Japan
+       insert(34022010,-118283863,"USC..Fight On");											// Posted from USC Los Angeles
+       insert(34072900,-118445700,"UCLA...Who Cares!!..Beat the Bruins");					// Posted from UCLA Los Angeles
+       insert(34133000,-118320900,"Hollywood..The place to be");							// Posted from Hollywood Los Angeles
    }
    
    public void dropDB() {
